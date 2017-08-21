@@ -6,6 +6,9 @@ img {
   height: 300px;
   margin: auto;
 }
+img:hover {
+    cursor: pointer;
+}
 p {
 display: inline;
 }
