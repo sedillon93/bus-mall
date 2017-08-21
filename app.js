@@ -48,17 +48,17 @@ function generateDisplay() {
     var identification = products[num].id;
     // var title = document.createElement('p');
     // title.innerText = products[num].name;
+    child.addEventListener('click', countClick);
     child.setAttribute('src', img);
     child.setAttribute('id', identification);
     body.appendChild(child);
     // body.appendChild(title);
   }
 }
+
 generateDisplay();
 
 function countClick(){
-  clicks++;
+  this.clicks++;
   generateDisplay();
 }
-var body = document.getElementsByTagName('body')[0];
-body.addEventListener('click', countClick);
