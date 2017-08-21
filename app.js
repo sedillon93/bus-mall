@@ -1,9 +1,9 @@
 'use-strict';
 
-function Product(name, path, id, clicks, shown) {
+function Product(name, id, path, clicks, shown) {
   this.name = name;
-  this.path = path;
   this.id = id;
+  this.path = path;
   this.clicks = 0;
   this.shown = 0;
 }
@@ -33,6 +33,12 @@ var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthul
 
 var body = document.getElementsByTagName('body')[0];
 for (var i = 0; i < 3; i++){
+  var child = document.createElement('img');
   var num = Math.floor(Math.random() * products.length);
-  var randomProd = products[num];
+  var img = products[num].path;
+  var identification = products[num].id;
+  child.innerText = products[num].name;
+  child.setAttribute('src', img);
+  child.setAttribute('id', identification);
+  body.appendChild(child);
 }
