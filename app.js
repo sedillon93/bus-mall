@@ -7,4 +7,23 @@ function Product(name, path, clicks, shown) {
   this.shown = 0;
 }
 
-var products = [['bag', bag.jpg], ['banana', banana.jpg], ['bathroom', bathroom.jpg], ['boots', boots.jpg], ['breakfast', breakfast.jpg], ['bubblegum', bubblegum.jpg], ['chair', chair.jpg], ['cthulthu', cthulthu.jpg], ['dogDuck', dogDuck.jpg], ['dragon', dragon.jpg], ['pen', pen.jpg], ['petSweep', petSweep.jpg], ['scissors', scissors.jpg], ['shark', shark.jpg], ['sweep', sweep.png], ['tauntaun', tauntaun.jpg], ['unicorn', unicorn.jpg],['usb', usb.gif], ['watercan', watercan.jpg], ['wineGlass', wineGlass.jpg]];
+var bag = new Product('bag', 'img/bag.jpg');
+var banana = new Product('banana', 'img/banana.jpg');
+var bathroom = new Product('bathroom', 'img/bathroom.jpg');
+var boots = new Product('boots', 'img/boots.jpg');
+var breakfast = new Product('breakfast', 'img/breakfast.jpg');
+var bubblegum = new Product('bubblegum', 'img/bubblegum.jpg');
+var chair = new Product('chair', 'img/chair.jpg');
+var cthulthu = new Product('cthulthu', 'img/cthulthu.jpg');
+var dogDuck = new Product('dogDuck', 'img/dogDuck.jpg');
+var dragon = new Product('dragon', 'img/dragon.jpg');
+var pen = new Product('pen', 'img/pen.jpg');
+var petSweep = new Product('petSweep', 'img/petSweep.jpg');
+var scissors = new Product('scissors', 'img/scissors.jpg');
+var shark = new Product('shark', 'img/shark.jpg');
+var sweep = new Product('sweep', 'img/sweep.png');
+var tauntaun = new Product('tauntaun', 'img/tauntaun.jpg');
+var unicorn = new Product('unicorn', 'img/unicorn.jpg');
+var usb = new Product('usb', 'img/usb.gif');
+var waterCan = new Product('waterCan', 'img/waterCan.jpg');
+var wineGlass = new Product('wineGlass', 'img/wineGlass.jpg');
