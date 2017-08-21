@@ -56,15 +56,21 @@ function generateDisplay() {
     // body.appendChild(title);
   }
 }
-generateDisplay();
 
-function countClick(){
-  var target = target.elements.id;
-  clicks++;
+function removeChildren() {
   for (var i = 0; i < 3; i++) {
-    var oldChildId = products[numbers[0].id];
+    var oldChildId = products[numbers[i]].id;
     var oldChild = document.getElementById(oldChildId);
     body.removeChild(oldChild);
   }
+  numbers = [];
+}
+
+generateDisplay();
+
+function countClick(){
+  var target = event.target.id;
+  // clicks++;
+  removeChildren();
   generateDisplay();
 }
