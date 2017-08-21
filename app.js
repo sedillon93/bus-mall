@@ -31,24 +31,34 @@ var wineGlass = new Product('wineGlass', 'wineGlass', 'img/wineGlass.jpg');
 
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-var numbers = [];
-var body = document.getElementsByTagName('body')[0];
-for (var i = 0; i < 3; i++){
-  var child = document.createElement('img');
-  var num = Math.floor(Math.random() * products.length);
+function generateDisplay() {
+  var numbers = [];
+  var body = document.getElementsByTagName('body')[0];
+  for (var i = 0; i < 3; i++){
+    var child = document.createElement('img');
+    var num = Math.floor(Math.random() * products.length);
 
-  while (numbers.includes(num)) {
-    num = Math.floor(Math.random() * products.length);
+    while (numbers.includes(num)) {
+      num = Math.floor(Math.random() * products.length);
+    }
+    numbers.push(num);
+
+    products[num].shown += 1;
+    var img = products[num].path;
+    var identification = products[num].id;
+    // var title = document.createElement('p');
+    // title.innerText = products[num].name;
+    child.setAttribute('src', img);
+    child.setAttribute('id', identification);
+    body.appendChild(child);
+    // body.appendChild(title);
   }
-  numbers.push(num);
-
-  products[num].shown += 1;
-  var img = products[num].path;
-  var identification = products[num].id;
-  // var title = document.createElement('p');
-  // title.innerText = products[num].name;
-  child.setAttribute('src', img);
-  child.setAttribute('id', identification);
-  body.appendChild(child);
-  // body.appendChild(title);
 }
+generateDisplay();
+
+function countClick(){
+  clicks++;
+  generateDisplay();
+}
+var body = document.getElementsByTagName('body')[0];
+body.addEventListener('click', countClick);
