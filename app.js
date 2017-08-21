@@ -15,7 +15,7 @@ var boots = new Product('boots', 'boots', 'img/boots.jpg');
 var breakfast = new Product('breakfast', 'breakfast', 'img/breakfast.jpg');
 var bubblegum = new Product('bubblegum', 'bubblegum', 'img/bubblegum.jpg');
 var chair = new Product('chair', 'chair', 'img/chair.jpg');
-var cthulthu = new Product('cthulthu', 'cthulthu', 'img/cthulthu.jpg');
+var cthulhu = new Product('cthulhu', 'cthulhu', 'img/cthulhu.jpg');
 var dogDuck = new Product('dogDuck', 'dogDuck', 'img/dogDuck.jpg');
 var dragon = new Product('dragon', 'dragon', 'img/dragon.jpg');
 var pen = new Product('pen', 'pen', 'img/pen.jpg');
@@ -29,16 +29,26 @@ var usb = new Product('usb', 'usb', 'img/usb.gif');
 var waterCan = new Product('waterCan', 'waterCan', 'img/waterCan.jpg');
 var wineGlass = new Product('wineGlass', 'wineGlass', 'img/wineGlass.jpg');
 
-var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulthu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
+var numbers = [];
 var body = document.getElementsByTagName('body')[0];
 for (var i = 0; i < 3; i++){
   var child = document.createElement('img');
   var num = Math.floor(Math.random() * products.length);
+
+  while (numbers.includes(num)) {
+    num = Math.floor(Math.random() * products.length);
+    numbers.push(num);
+  }
+
+  products[num].shown += 1;
   var img = products[num].path;
   var identification = products[num].id;
-  child.innerText = products[num].name;
+  // var title = document.createElement('p');
+  // title.innerText = products[num].name;
   child.setAttribute('src', img);
   child.setAttribute('id', identification);
   body.appendChild(child);
+  // body.appendChild(title);
 }
