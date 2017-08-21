@@ -27,3 +27,11 @@ var unicorn = new Product('unicorn', 'img/unicorn.jpg');
 var usb = new Product('usb', 'img/usb.gif');
 var waterCan = new Product('waterCan', 'img/waterCan.jpg');
 var wineGlass = new Product('wineGlass', 'img/wineGlass.jpg');
+
+var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulthu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+
+var body = document.getElementsByTagName('body')[0];
+for (var i = 0; i < 3; i++){
+  var num = Math.floor(Math.random() * products.length);
+  console.log(num);
+}
