@@ -39,8 +39,8 @@ for (var i = 0; i < 3; i++){
 
   while (numbers.includes(num)) {
     num = Math.floor(Math.random() * products.length);
-    numbers.push(num);
   }
+  numbers.push(num);
 
   products[num].shown += 1;
   var img = products[num].path;
