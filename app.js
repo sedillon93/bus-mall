@@ -34,8 +34,6 @@ var wineGlass = new Product('Wine glass', 'wineGlass', 'img/wineGlass.jpg');
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
 var body = document.getElementsByTagName('body')[0];
-var ul = document.createElement('ul');
-body.appendChild(ul);
 
 var usedProd = [];
 var possibleProd = [];
@@ -44,7 +42,8 @@ var totalClicks = 0;
 
 function generateDisplay(){
   for (var i = 0; i < 3; i++){
-    var prod = document.createElement('img');
+    //get my div from the nodeList of divs
+    var div = document.getElementsByClassName('div')[i];
     var num = Math.floor(Math.random() * products.length);
 
     while ((numbers.includes(num)) || (usedProd.includes(num))){
