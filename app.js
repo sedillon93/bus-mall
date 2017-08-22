@@ -119,13 +119,17 @@ for (var i = 0; i < products.length; i++){
   labels.push(products[i].name);
 }
 
-data {
+var chartConfig = {
   type: 'bar',
-  data {
+  data: {
     labels: labels,
-    dataset [{
+    dataset: [{
       label: 'Number of Votes',
       data: data
     }]
   }
-}
+};
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+new Chart(context, chartConfig);
