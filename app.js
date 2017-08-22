@@ -106,3 +106,9 @@ function countClick(event){
 }
 
 generateDisplay();
+
+//add number of clicks for each product to array of data used for bar chart
+var data = [];
+for (var i = 0; i < products.length; i++){
+  data.push(products[i].clicks);
+}
