@@ -31,8 +31,6 @@ var wineGlass = new Product('Wine glass', 'wineGlass', 'img/wineGlass.jpg');
 
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-document.getElementsByClassName('product');
-// product.addEventListener('click', countClick);
 var body = document.getElementsByTagName('body')[0];
 var ul = document.createElement('ul');
 body.appendChild(ul);
@@ -58,7 +56,7 @@ function generateDisplay(){
     var identification = products[num].id;
     prod.setAttribute('src', img);
     prod.setAttribute('id', identification);
-    prod.setAttribute('class', 'product');
+    // prod.setAttribute('class', 'product');
     prod.addEventListener('click', countClick);
     body.appendChild(prod);
   }
@@ -84,21 +82,50 @@ function countClick(event){
   for (var i = 0; i < products.length; i++){
     if (products[i].id === target) {
       var targetProd = products[i];
+      targetProd.clicks++;
     }
   }
-  var clicks = targetProd.clicks++;
   totalClicks++;
-  if (totalClicks > 24){
+  if (totalClicks > 4){
     var prods = document.getElementsByClassName('product');
     for (var i = 0; i < prods.length; i++){
       prods[i].removeEventListener('click', countClick);
     }
-    //add list displaying # of clicks and shows for each product;
+    //add number of clicks for each product to array of data used for bar chart
+    var dataList = [];
     for (var i = 0; i < products.length; i++){
-      var li = document.createElement('li');
-      li.innerText = products[i].clicks + ' votes for the ' + products[i].name;
-      ul.appendChild(li);
+      dataList.push(products[i].clicks);
     }
+
+    //add product name to array for labels used in bar chart
+    var labelsList = [];
+    for (var i = 0; i < products.length; i++){
+      labelsList.push(products[i].name);
+    }
+
+    var chartConfig = {
+      type: 'bar',
+      data: {
+        labels: labelsList,
+        dataset: [{
+          label: 'Number of Votes',
+          data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 3
+        }]
+      }
+    };
+
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var barChart = new Chart(context, chartConfig);
+    // add list displaying # of clicks and shows for each product;
+    // for (var i = 0; i < products.length; i++){
+    //   var li = document.createElement('li');
+    //   li.innerText = products[i].clicks + ' votes for the ' + products[i].name;
+    //   ul.appendChild(li);
+    // }
   }
   clearDisplay();
   generateDisplay();
@@ -106,30 +133,3 @@ function countClick(event){
 }
 
 generateDisplay();
-
-//add number of clicks for each product to array of data used for bar chart
-var dataList = [];
-for (var i = 0; i < products.length; i++){
-  dataList.push(products[i].clicks);
-}
-
-//add product name to array for labels used in bar chart
-var labelsList = [];
-for (var i = 0; i < products.length; i++){
-  labelsList.push(products[i].name);
-}
-
-var chartConfig = {
-  type: 'bar',
-  data: {
-    labels: labelsList,
-    dataset: [{
-      label: 'Number of Votes',
-      data: dataList
-    }]
-  }
-};
-
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-var barChart = new Chart(context, chartConfig);
