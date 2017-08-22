@@ -32,6 +32,9 @@ var wineGlass = new Product('wineGlass', 'wineGlass', 'img/wineGlass.jpg');
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
 var body = document.getElementsByTagName('body')[0];
+var ul = document.createElement('ul');
+body.appendChild(ul);
+
 var usedProd = [];
 var possibleProd = [];
 var numbers = [];
@@ -49,6 +52,8 @@ function generateDisplay(){
     usedProd.push(num);
 
     products[num].shown += 1;
+    var li = document.createElement('li');
+    li.innerText = products[num].name + products[num].clicks + products[num].shown;
     var img = products[num].path;
     var identification = products[num].id;
     prod.addEventListener('click', countClick);
@@ -84,6 +89,10 @@ function countClick(){
   totalClicks++;
   if (totalClicks > 25){
     prod.removeEventListener('click', countClick);
+    //add list displaying # of clicks and shows for each product;
+    for (var i = 0; i < products.length; i++){
+      ul.appendChild(li);
+    }
   }
   clearDisplay();
   generateDisplay();
