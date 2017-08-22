@@ -88,7 +88,7 @@ function countClick(event){
   }
   var clicks = targetProd.clicks++;
   totalClicks++;
-  if (totalClicks > 4){
+  if (totalClicks > 24){
     var prods = document.getElementsByClassName('product');
     for (var i = 0; i < prods.length; i++){
       prods[i].removeEventListener('click', countClick);
