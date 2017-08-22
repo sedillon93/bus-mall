@@ -35,6 +35,7 @@ var body = document.getElementsByTagName('body')[0];
 var usedProd = [];
 var possibleProd = [];
 var numbers = [];
+var totalClicks = 0;
 
 function generateDisplay(){
   for (var i = 0; i < 3; i++){
@@ -80,11 +81,13 @@ function countClick(){
     }
   }
   var clicks = targetProd.clicks++;
+  totalClicks++;
+  if (totalClicks > 25){
+    prod.removeEventListener('click', countClick);
+  }
   clearDisplay();
   generateDisplay();
   clearUsed();
 }
 
 generateDisplay();
-
-for (var j = 0; j < 25; j++){}
