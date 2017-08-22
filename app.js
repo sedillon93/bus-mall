@@ -112,3 +112,9 @@ var data = [];
 for (var i = 0; i < products.length; i++){
   data.push(products[i].clicks);
 }
+
+//add product name to array for labels used in bar chart
+var labels = [];
+for (var i = 0; i < products.length; i++){
+  labels.push(products[i].name);
+}
