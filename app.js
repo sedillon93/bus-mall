@@ -36,7 +36,7 @@ var numbers = [];
 
 function generateDisplay() {
   for (var i = 0; i < 3; i++){
-    var child = document.createElement('img');
+    var prod = document.createElement('img');
     var num = Math.floor(Math.random() * products.length);
 
     while (numbers.includes(num)) {
@@ -49,15 +49,15 @@ function generateDisplay() {
     var identification = products[num].id;
     // var title = document.createElement('p');
     // title.innerText = products[num].name;
-    child.addEventListener('click', countClick);
-    child.setAttribute('src', img);
-    child.setAttribute('id', identification);
-    body.appendChild(child);
+    prod.addEventListener('click', countClick);
+    prod.setAttribute('src', img);
+    prod.setAttribute('id', identification);
+    body.appendChild(prod);
     // body.appendChild(title);
   }
 }
 
-function removeChildren() {
+function removeChild() {
   for (var i = 0; i < 3; i++) {
     var oldChildId = products[numbers[i]].id;
     var oldChild = document.getElementById(oldChildId);
@@ -70,7 +70,12 @@ generateDisplay();
 
 function countClick(){
   var target = event.target.id;
-  // clicks++;
-  removeChildren();
+  for (var i = 0; i < products.length; i++){
+    if (products[i].id === target) {
+      var targetProd = products[i];
+    }
+  }
+  var clicks = targetProd.clicks++;
+  removeChild();
   generateDisplay();
 }
