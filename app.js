@@ -51,12 +51,11 @@ function generateDisplay(){
     usedProd.push(num);
 
     products[num].shown += 1;
-    var li = document.createElement('li');
     var img = products[num].path;
     var identification = products[num].name;
-    prod.addEventListener('click', countClick);
     prod.setAttribute('src', img);
     prod.setAttribute('id', identification);
+    prod.setAttribute('class', 'product');
     body.appendChild(prod);
   }
 }
@@ -86,10 +85,11 @@ function countClick(){
   var clicks = targetProd.clicks++;
   totalClicks++;
   if (totalClicks > 5){
-    prod.removeEventListener('click', countClick);
+    product.removeEventListener('click', countClick);
     //add list displaying # of clicks and shows for each product;
     for (var i = 0; i < products.length; i++){
-      li.innerText = products[num].name + products[num].clicks + products[num].shown;
+      var li = document.createElement('li');
+      li.innerText = products[i].clicks + 'votes for the' + products[i].name;
       ul.appendChild(li);
       body.appendChild(ul);
     }
@@ -100,3 +100,5 @@ function countClick(){
 }
 
 generateDisplay();
+var product = document.getElementsByClassName('product')[0];
+product.addEventListener('click', countClick);
