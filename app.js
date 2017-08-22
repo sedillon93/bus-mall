@@ -41,7 +41,7 @@ function generateDisplay() {
     var prod = document.createElement('img');
     var num = Math.floor(Math.random() * products.length);
 
-    while (numbers.includes(num)) {
+    while ((numbers.includes(num)) || (usedProd.includes(num))){
       num = Math.floor(Math.random() * products.length);
     }
     numbers.push(num);
