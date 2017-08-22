@@ -72,8 +72,6 @@ function clearDisplay() {
   numbers = [];
 }
 
-generateDisplay();
-
 function countClick(){
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
@@ -86,3 +84,7 @@ function countClick(){
   generateDisplay();
   clearUsed();
 }
+
+generateDisplay();
+
+for (var j = 0; j < 25; j++){}
