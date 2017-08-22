@@ -1,4 +1,5 @@
 'use-strict';
+var dataList = [];
 
 function Product(name, id, path) {
   this.name = name;
@@ -86,46 +87,15 @@ function countClick(event){
     }
   }
   totalClicks++;
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
-  //add number of clicks for each product to array of data used for bar chart
-  var dataList = [];
-  for (var i = 0; i < products.length; i++){
-    dataList.push(products[i].clicks);
-  }
-  //add product name to array for labels used in bar chart
-  var labelsList = [];
-  for (var i = 0; i < products.length; i++){
-    labelsList.push(products[i].name);
-  }
-
-  var chartConfig = {
-    type: 'bar',
-    data: {
-      labels: labelsList,
-      dataset: [{
-        label: 'Number of Votes',
-        data: dataList,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 3
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
-      }
-    }
-  };
-
   if (totalClicks > 4){
     var prods = document.getElementsByClassName('product');
     for (var i = 0; i < prods.length; i++){
       prods[i].removeEventListener('click', countClick);
+    }
+
+    //add number of clicks for each product to array of data used for bar chart
+    for (var i = 0; i < products.length; i++){
+      dataList.push(products[i].clicks);
     }
     var barChart = new Chart(context, chartConfig);
     // add list displaying # of clicks and shows for each product;
@@ -141,3 +111,34 @@ function countClick(event){
 }
 
 generateDisplay();
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+//add product name to array for labels used in bar chart
+var labelsList = [];
+for (var i = 0; i < products.length; i++){
+  labelsList.push(products[i].name);
+}
+
+var chartConfig = {
+  type: 'bar',
+  data: {
+    labels: labelsList,
+    datasets: [{
+      label: 'Number of Votes',
+      data: dataList,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 3
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+};
