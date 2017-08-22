@@ -1,8 +1,14 @@
 *{
   box-sizing: border-box;
 }
-img {
+.clearfix {
+  clear: both;
+}
+div {
+  float: left;
   width: 30%;
+}
+img {
   height: 300px;
   margin: auto;
 }
@@ -10,5 +16,7 @@ img:hover {
     cursor: pointer;
 }
 p {
-display: inline;
+  width: 30%;
+  text-align: center;
+  display: inline;
 }
