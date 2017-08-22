@@ -118,3 +118,14 @@ var labels = [];
 for (var i = 0; i < products.length; i++){
   labels.push(products[i].name);
 }
+
+data {
+  type: 'bar',
+  data {
+    labels: labels,
+    dataset [{
+      label: 'Number of Votes',
+      data: data
+    }]
+  }
+}
