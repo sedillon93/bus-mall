@@ -32,6 +32,8 @@ var wineGlass = new Product('wineGlass', 'wineGlass', 'img/wineGlass.jpg');
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
 var body = document.getElementsByTagName('body')[0];
+var usedProd = [];
+var possibleProd = [];
 var numbers = [];
 
 function generateDisplay() {
@@ -43,17 +45,15 @@ function generateDisplay() {
       num = Math.floor(Math.random() * products.length);
     }
     numbers.push(num);
+    usedProd.push(num);
 
     products[num].shown += 1;
     var img = products[num].path;
     var identification = products[num].id;
-    // var title = document.createElement('p');
-    // title.innerText = products[num].name;
     prod.addEventListener('click', countClick);
     prod.setAttribute('src', img);
     prod.setAttribute('id', identification);
     body.appendChild(prod);
-    // body.appendChild(title);
   }
 }
 
