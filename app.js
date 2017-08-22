@@ -91,12 +91,14 @@ function countClick(event){
     for (var i = 0; i < prods.length; i++){
       prods[i].removeEventListener('click', countClick);
     }
+
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
     //add number of clicks for each product to array of data used for bar chart
     var dataList = [];
     for (var i = 0; i < products.length; i++){
       dataList.push(products[i].clicks);
     }
-
     //add product name to array for labels used in bar chart
     var labelsList = [];
     for (var i = 0; i < products.length; i++){
@@ -109,16 +111,21 @@ function countClick(event){
         labels: labelsList,
         dataset: [{
           label: 'Number of Votes',
-          data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+          data: dataList,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255,99,132,1)',
           borderWidth: 3
         }]
       }
+      // scales: {
+      //   yAxes: [{
+      //     ticks: {
+      //       beginAtZero:true
+      //     }
+      //   }]
+      // }
     };
 
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
     var barChart = new Chart(context, chartConfig);
     // add list displaying # of clicks and shows for each product;
     // for (var i = 0; i < products.length; i++){
