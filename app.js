@@ -42,8 +42,6 @@ var totalClicks = 0;
 
 function generateDisplay(){
   for (var i = 0; i < 3; i++){
-    //get my div from the nodeList of divs
-    var div = document.getElementsByClassName('div')[i];
     var num = Math.floor(Math.random() * products.length);
 
     while ((numbers.includes(num)) || (usedProd.includes(num))){
@@ -51,15 +49,19 @@ function generateDisplay(){
     }
     numbers.push(num);
     usedProd.push(num);
-
     products[num].shown += 1;
+
+    var div = document.getElementsByTagName('div')[i];
+    // console.log(div.childNodes);
+    var prodImage = div.childNodes[1];
+    var prodName = div.childNodes[3];
+    console.log(prodName);
     var img = products[num].path;
-    var identification = products[num].id;
-    prod.setAttribute('src', img);
-    prod.setAttribute('id', identification);
-    // prod.setAttribute('class', 'product');
-    prod.addEventListener('click', countClick);
-    body.appendChild(prod);
+    var name = products[num].name;
+    prodImage.setAttribute('src', img);
+    prodName.innerText = products[num].name;
+    prodImage.setAttribute('class', 'product');
+    prodImage.addEventListener('click', countClick);
   }
 }
 
@@ -70,11 +72,11 @@ function clearUsed(){
 }
 
 function clearDisplay() {
-  for (var i = 0; i < 3; i++) {
-    var oldChildId = products[numbers[i]].id;
-    var oldChild = document.getElementById(oldChildId);
-    body.removeChild(oldChild);
-  }
+  // for (var i = 0; i < 3; i++) {
+  //   var oldChildId = products[numbers[i]].id;
+  //   var oldChild = document.getElementById(oldChildId);
+  //   body.removeChild(oldChild);
+  // }
   numbers = [];
 }
 
