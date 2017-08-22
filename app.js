@@ -108,28 +108,28 @@ function countClick(event){
 generateDisplay();
 
 //add number of clicks for each product to array of data used for bar chart
-var data = [];
+var dataList = [];
 for (var i = 0; i < products.length; i++){
-  data.push(products[i].clicks);
+  dataList.push(products[i].clicks);
 }
 
 //add product name to array for labels used in bar chart
-var labels = [];
+var labelsList = [];
 for (var i = 0; i < products.length; i++){
-  labels.push(products[i].name);
+  labelsList.push(products[i].name);
 }
 
 var chartConfig = {
   type: 'bar',
   data: {
-    labels: labels,
+    labels: labelsList,
     dataset: [{
       label: 'Number of Votes',
-      data: data
+      data: dataList
     }]
   }
 };
 
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-new Chart(context, chartConfig);
+var barChart = new Chart(context, chartConfig);
