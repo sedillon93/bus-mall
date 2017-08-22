@@ -1,4 +1,5 @@
 'use-strict';
+//leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
 var dataList = [];
 
 function Product(name, id, path) {
@@ -98,12 +99,6 @@ function countClick(event){
       dataList.push(products[i].clicks);
     }
     var barChart = new Chart(context, chartConfig);
-    // add list displaying # of clicks and shows for each product;
-    // for (var i = 0; i < products.length; i++){
-    //   var li = document.createElement('li');
-    //   li.innerText = products[i].clicks + ' votes for the ' + products[i].name;
-    //   ul.appendChild(li);
-    // }
   }
   clearDisplay();
   generateDisplay();
@@ -117,7 +112,7 @@ var context = canvas.getContext('2d');
 //add product name to array for labels used in bar chart
 var labelsList = [];
 for (var i = 0; i < products.length; i++){
-  labelsList.push(products[i].name);
+  labelsList.push(products[i].id);
 }
 
 var chartConfig = {
@@ -127,8 +122,8 @@ var chartConfig = {
     datasets: [{
       label: 'Number of Votes',
       data: dataList,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255,99,132,1)',
+      backgroundColor: 'rgba(255, 159, 64, 0.2)',
+      borderColor: 'rgba(255, 159, 64, 1)',
       borderWidth: 3
     }]
   },
