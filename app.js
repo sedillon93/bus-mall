@@ -36,7 +36,7 @@ var usedProd = [];
 var possibleProd = [];
 var numbers = [];
 
-function generateDisplay() {
+function generateDisplay(){
   for (var i = 0; i < 3; i++){
     var prod = document.createElement('img');
     var num = Math.floor(Math.random() * products.length);
@@ -57,7 +57,13 @@ function generateDisplay() {
   }
 }
 
-function removeChild() {
+function clearUsed(){
+  for (var i = 0; i < 3; i++){
+    usedProd.shift();
+  }
+}
+
+function clearDisplay() {
   for (var i = 0; i < 3; i++) {
     var oldChildId = products[numbers[i]].id;
     var oldChild = document.getElementById(oldChildId);
@@ -76,6 +82,7 @@ function countClick(){
     }
   }
   var clicks = targetProd.clicks++;
-  removeChild();
+  clearDisplay();
   generateDisplay();
+  clearUsed();
 }
