@@ -53,7 +53,6 @@ function generateDisplay(){
 
     products[num].shown += 1;
     var li = document.createElement('li');
-    li.innerText = products[num].name + products[num].clicks + products[num].shown;
     var img = products[num].path;
     var identification = products[num].id;
     prod.addEventListener('click', countClick);
@@ -91,7 +90,9 @@ function countClick(){
     prod.removeEventListener('click', countClick);
     //add list displaying # of clicks and shows for each product;
     for (var i = 0; i < products.length; i++){
+      li.innerText = products[num].name + products[num].clicks + products[num].shown;
       ul.appendChild(li);
+      body.appendChild(ul);
     }
   }
   clearDisplay();
