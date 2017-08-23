@@ -1,6 +1,8 @@
 'use-strict';
 //leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
 var dataList = [];
+var totalClicks = 0;
+var maxClicks = 25;
 
 function Product(name, id, path) {
   this.name = name;
@@ -38,7 +40,6 @@ var body = document.getElementsByTagName('body')[0];
 var usedProd = [];
 var possibleProd = [];
 var numbers = [];
-var totalClicks = 0;
 
 function generateDisplay(){
   for (var i = 0; i < 3; i++){
@@ -70,9 +71,6 @@ function clearUsed(){
 
 function countClick(event){
   var target = event.target.id;
-  console.log(target);
-  console.log(event);
-  console.log(event.target);
   for (var i = 0; i < products.length; i++){
     // console.log(products[i]);
     if (products[i].id === target){
@@ -84,7 +82,7 @@ function countClick(event){
   numbers = [];
   generateDisplay();
   clearUsed();
-  if (totalClicks > 24){
+  if (totalClicks >= maxClicks){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
