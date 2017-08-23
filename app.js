@@ -1,4 +1,8 @@
 'use-strict';
+//leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
+var dataList = [];
+var totalClicks = 0;
+var maxClicks = 25;
 
 function Product(name, id, path) {
   this.name = name;
@@ -31,20 +35,14 @@ var wineGlass = new Product('Wine glass', 'wineGlass', 'img/wineGlass.jpg');
 
 var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-document.getElementsByClassName('product');
-// product.addEventListener('click', countClick);
 var body = document.getElementsByTagName('body')[0];
-var ul = document.createElement('ul');
-body.appendChild(ul);
 
 var usedProd = [];
 var possibleProd = [];
 var numbers = [];
-var totalClicks = 0;
 
 function generateDisplay(){
   for (var i = 0; i < 3; i++){
-    var prod = document.createElement('img');
     var num = Math.floor(Math.random() * products.length);
 
     while ((numbers.includes(num)) || (usedProd.includes(num))){
@@ -52,15 +50,16 @@ function generateDisplay(){
     }
     numbers.push(num);
     usedProd.push(num);
-
     products[num].shown += 1;
+
+    var div = document.getElementsByTagName('div')[i];
+    var prodImage = div.childNodes[1];
     var img = products[num].path;
     var identification = products[num].id;
-    prod.setAttribute('src', img);
-    prod.setAttribute('id', identification);
-    prod.setAttribute('class', 'product');
-    prod.addEventListener('click', countClick);
-    body.appendChild(prod);
+    prodImage.setAttribute('src', img);
+    prodImage.setAttribute('id', identification);
+    prodImage.setAttribute('class', 'product');
+    prodImage.addEventListener('click', countClick);
   }
 }
 
@@ -70,39 +69,60 @@ function clearUsed(){
   }
 }
 
-function clearDisplay() {
-  for (var i = 0; i < 3; i++) {
-    var oldChildId = products[numbers[i]].id;
-    var oldChild = document.getElementById(oldChildId);
-    body.removeChild(oldChild);
-  }
-  numbers = [];
-}
-
 function countClick(event){
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
-    if (products[i].id === target) {
+    // console.log(products[i]);
+    if (products[i].id === target){
       var targetProd = products[i];
+      targetProd.clicks++;
     }
   }
-  var clicks = targetProd.clicks++;
   totalClicks++;
-  if (totalClicks > 24){
-    var prods = document.getElementsByClassName('product');
-    for (var i = 0; i < prods.length; i++){
-      prods[i].removeEventListener('click', countClick);
-    }
-    //add list displaying # of clicks and shows for each product;
-    for (var i = 0; i < products.length; i++){
-      var li = document.createElement('li');
-      li.innerText = products[i].clicks + ' votes for the ' + products[i].name;
-      ul.appendChild(li);
-    }
-  }
-  clearDisplay();
+  numbers = [];
   generateDisplay();
   clearUsed();
+  if (totalClicks >= maxClicks){
+    var prodImages = document.getElementsByClassName('product');
+    for (var i = 0; i < prodImages.length; i++){
+      prodImages[i].removeEventListener('click', countClick);
+    }
+
+    for (var i = 0; i < products.length; i++){
+      dataList.push(products[i].clicks);
+    }
+    var barChart = new Chart(context, chartConfig);
+  }
 }
 
 generateDisplay();
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+var labelsList = [];
+for (var i = 0; i < products.length; i++){
+  labelsList.push(products[i].id);
+}
+
+var chartConfig = {
+  type: 'bar',
+  data: {
+    labels: labelsList,
+    datasets: [{
+      label: 'Number of Votes',
+      data: dataList,
+      backgroundColor: 'rgba(255, 159, 64, 0.2)',
+      borderColor: 'rgba(255, 159, 64, 1)',
+      borderWidth: 3
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+};
