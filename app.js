@@ -1,8 +1,9 @@
 'use-strict';
 //leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
 var dataList = [];
+var labelsList = [];
 var totalClicks = 0;
-var maxClicks = 25;
+var maxClicks = 5;
 
 function Product(name, id, path) {
   this.name = name;
@@ -69,6 +70,15 @@ function clearUsed(){
   }
 }
 
+// function populateShownProducts(){
+//   for (var i = 0; i < products.length; i++){
+//     if (products[i].shown > 0){
+//       labelsList.push(products[i].id);
+//       dataList.push(products[i].clicks);
+//     }
+//   }
+// }
+
 function countClick(event){
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
@@ -86,10 +96,10 @@ function countClick(event){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
-    }
-
-    for (var i = 0; i < products.length; i++){
-      dataList.push(products[i].clicks);
+      if (products[i].shown > 0){
+        labelsList.push(products[i].id);
+        dataList.push(products[i].clicks);
+      }
     }
     var barChart = new Chart(context, chartConfig);
   }
@@ -98,11 +108,6 @@ function countClick(event){
 generateDisplay();
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-
-var labelsList = [];
-for (var i = 0; i < products.length; i++){
-  labelsList.push(products[i].id);
-}
 
 var chartConfig = {
   type: 'bar',
