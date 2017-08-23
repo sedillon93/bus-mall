@@ -96,15 +96,19 @@ function countClick(event){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
-      if (products[i].shown > 0){
-        labelsList.push(products[i].id);
-        dataList.push(products[i].clicks);
-      }
+    }
+    for (var i = 0; i < products.length; i++) {
+      dataList.push(products[i].clicks);
     }
     var barChart = new Chart(context, chartConfig);
+    console.log(dataList);
+    localStorage.setItem('busMallClicks', JSON.stringify(dataList));
+
   }
 }
-
+for (var i = 0; i < products.length; i++) {
+  labelsList.push(products[i].id);
+}
 generateDisplay();
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
