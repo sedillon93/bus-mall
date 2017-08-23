@@ -52,14 +52,10 @@ function generateDisplay(){
     products[num].shown += 1;
 
     var div = document.getElementsByTagName('div')[i];
-    // console.log(div.childNodes);
+    console.log(div.childNodes);
     var prodImage = div.childNodes[1];
-    var prodName = div.childNodes[3];
-    console.log(prodName);
     var img = products[num].path;
-    var name = products[num].name;
     prodImage.setAttribute('src', img);
-    prodName.innerText = products[num].name;
     prodImage.setAttribute('class', 'product');
     prodImage.addEventListener('click', countClick);
   }
@@ -89,10 +85,14 @@ function countClick(event){
     }
   }
   totalClicks++;
+  clearDisplay();
+  generateDisplay();
+  clearUsed();
   if (totalClicks > 4){
-    var prods = document.getElementsByClassName('product');
-    for (var i = 0; i < prods.length; i++){
-      prods[i].removeEventListener('click', countClick);
+    var prodImages = document.getElementsByClassName('product');
+    console.log(prodImages);
+    for (var i = 0; i < prodImages.length; i++){
+      prodImages[i].removeEventListener('click', countClick);
     }
 
     //add number of clicks for each product to array of data used for bar chart
@@ -101,9 +101,6 @@ function countClick(event){
     }
     var barChart = new Chart(context, chartConfig);
   }
-  clearDisplay();
-  generateDisplay();
-  clearUsed();
 }
 
 generateDisplay();
