@@ -84,7 +84,7 @@ function countClick(event){
   numbers = [];
   generateDisplay();
   clearUsed();
-  if (totalClicks > 4){
+  if (totalClicks > 24){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
