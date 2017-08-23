@@ -4,6 +4,12 @@
 .clearfix {
   clear: both;
 }
+h1 {
+  text-align: center;
+}
+.instructions {
+  margin: 0 20px;
+}
 div {
   float: left;
   margin: 20px;
