@@ -52,10 +52,11 @@ function generateDisplay(){
     products[num].shown += 1;
 
     var div = document.getElementsByTagName('div')[i];
-    console.log(div.childNodes);
     var prodImage = div.childNodes[1];
     var img = products[num].path;
+    var identification = products[num].id;
     prodImage.setAttribute('src', img);
+    prodImage.setAttribute('id', identification);
     prodImage.setAttribute('class', 'product');
     prodImage.addEventListener('click', countClick);
   }
@@ -67,35 +68,28 @@ function clearUsed(){
   }
 }
 
-function clearDisplay() {
-  // for (var i = 0; i < 3; i++) {
-  //   var oldChildId = products[numbers[i]].id;
-  //   var oldChild = document.getElementById(oldChildId);
-  //   body.removeChild(oldChild);
-  // }
-  numbers = [];
-}
-
 function countClick(event){
   var target = event.target.id;
+  console.log(target);
+  console.log(event);
+  console.log(event.target);
   for (var i = 0; i < products.length; i++){
-    if (products[i].id === target) {
+    // console.log(products[i]);
+    if (products[i].id === target){
       var targetProd = products[i];
       targetProd.clicks++;
     }
   }
   totalClicks++;
-  clearDisplay();
+  numbers = [];
   generateDisplay();
   clearUsed();
   if (totalClicks > 4){
     var prodImages = document.getElementsByClassName('product');
-    console.log(prodImages);
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
     }
 
-    //add number of clicks for each product to array of data used for bar chart
     for (var i = 0; i < products.length; i++){
       dataList.push(products[i].clicks);
     }
@@ -107,7 +101,6 @@ generateDisplay();
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-//add product name to array for labels used in bar chart
 var labelsList = [];
 for (var i = 0; i < products.length; i++){
   labelsList.push(products[i].id);
