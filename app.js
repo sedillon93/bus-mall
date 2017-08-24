@@ -5,7 +5,7 @@ var labelsList = [];
 var totalClicks = 0;
 var maxClicks = 5;
 var sumTotalArray = [];
-var products = [];
+var products = [];/////////////////
 function Product(name, id, path) {
   this.name = name;
   this.id = id;
@@ -14,8 +14,9 @@ function Product(name, id, path) {
   this.shown = 0;
 }
 
-if(localStorage.busMallClicks) {
-  products = JSON.parse(localStorage.busMallClicks);
+if(localStorage.busMallClicks) {//////////////////
+  console.log(localStorage.busMallClicks);/////////////////
+  products = JSON.parse(localStorage.busMallClicks);/////////////////
 }
 else {
   var bag = new Product('Bag', 'bag', 'img/bag.jpg');
@@ -76,15 +77,6 @@ function clearUsed(){
   }
 }
 
-// function populateShownProducts(){
-//   for (var i = 0; i < products.length; i++){
-//     if (products[i].shown > 0){
-//       labelsList.push(products[i].id);
-//       dataList.push(products[i].clicks);
-//     }
-//   }
-// }
-
 function countClick(event){
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
@@ -107,8 +99,11 @@ function countClick(event){
       dataList.push(products[i].clicks);
     }
     var barChart = new Chart(context, chartConfig);
+    var persistedData = JSON.stringify(products);/////////////////////
+    localStorage.busMallClicks = persistedData;/////////////////
   }
 };
+
 for (var i = 0; i < products.length; i++) {
   labelsList.push(products[i].id);
 }
