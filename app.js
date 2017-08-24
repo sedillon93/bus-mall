@@ -2,8 +2,9 @@
 //leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
 var dataList = [];
 var labelsList = [];
+var percents = [];
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 25;
 
 function Product(name, id, path) {
   this.name = name;
@@ -74,6 +75,13 @@ for (var i = 0; i < products.length; i++){
   labelsList.push(products[i].id);
 }
 
+function generateGraphData() {
+  for (var i = 0; i < products.length; i++){
+    var percent = (products[i].clicks / products[i].shown) * 100;
+    percents.push(percent);
+  }
+}
+
 function countClick(){
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
@@ -99,6 +107,7 @@ function countClick(){
     for (var i = 0; i < products.length; i++){
       dataList.push(products[i].clicks);
     }
+    generateGraphData();
     var barChart = new Chart(context, chartConfig);
   }
 }
@@ -116,6 +125,13 @@ var chartConfig = {
       data: dataList,
       backgroundColor: 'rgba(255, 159, 64, 0.2)',
       borderColor: 'rgba(255, 159, 64, 1)',
+      borderWidth: 3
+    },
+    {
+      label: 'Percent Chosen of Times Shown',
+      data: percents,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 3
     }]
   },
