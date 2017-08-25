@@ -2,10 +2,12 @@
 //leave this global so that it gets updated as product clicks property changes; otherwise created on pageload and won't change
 var dataList = [];
 var labelsList = [];
+var percents = [];
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 25;
 var sumTotalArray = [];
-var products = [];/////////////////
+var products = [];
+
 function Product(name, id, path) {
   this.name = name;
   this.id = id;
@@ -14,9 +16,8 @@ function Product(name, id, path) {
   this.shown = 0;
 }
 
-if(localStorage.busMallClicks) {//////////////////
-  console.log(localStorage.busMallClicks);/////////////////
-  products = JSON.parse(localStorage.busMallClicks);/////////////////
+if(localStorage.busMallClicks) {
+  products = JSON.parse(localStorage.busMallClicks);
 }
 else {
   var bag = new Product('Bag', 'bag', 'img/bag.jpg');
@@ -61,7 +62,6 @@ function generateDisplay(){
 
     var div = document.getElementsByTagName('div')[i];
     var prodImage = div.childNodes[1];
-    console.log(prodImage);
     var img = products[num].path;
     var identification = products[num].id;
     prodImage.setAttribute('src', img);
@@ -77,10 +77,22 @@ function clearUsed(){
   }
 }
 
+
+for (var i = 0; i < products.length; i++){
+  labelsList.push(products[i].id);
+}
+
+function generateGraphData() {
+  for (var i = 0; i < products.length; i++){
+    var percent = (products[i].clicks / products[i].shown) * 100;
+    percents.push(percent);
+  }
+}
+
 function countClick(event){
+
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
-    // console.log(products[i]);
     if (products[i].id === target){
       var targetProd = products[i];
       targetProd.clicks++;
@@ -94,13 +106,21 @@ function countClick(event){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
+
+      // if (products[i].shown > 0){
+      //   labelsList.push(products[i].id);
+      //   dataList.push(products[i].clicks);
+      // }
     }
+    
     for (var i = 0; i < products.length; i++) {
+
       dataList.push(products[i].clicks);
     }
+    generateGraphData();
     var barChart = new Chart(context, chartConfig);
-    var persistedData = JSON.stringify(products);/////////////////////
-    localStorage.busMallClicks = persistedData;/////////////////
+    var persistedData = JSON.stringify(products);
+    localStorage.busMallClicks = persistedData;
   }
 };
 
@@ -120,6 +140,13 @@ var chartConfig = {
       data: dataList,
       backgroundColor: 'rgba(255, 159, 64, 0.2)',
       borderColor: 'rgba(255, 159, 64, 1)',
+      borderWidth: 3
+    },
+    {
+      label: 'Percent Chosen of Times Shown',
+      data: percents,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 3
     }]
   },
