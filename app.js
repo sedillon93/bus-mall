@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 function Product(name, id, path) {
   this.name = name;
@@ -38,7 +38,6 @@ var ul = document.createElement('ul');
 body.appendChild(ul);
 
 var usedProd = [];
-var possibleProd = [];
 var numbers = [];
 var totalClicks = 0;
 
