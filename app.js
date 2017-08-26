@@ -111,6 +111,7 @@ function countClick(event){
     }
     generateGraphData();
     var barChart = new Chart(context, chartConfig);
+    var barChart = new Chart(ctx, percentConfig);
     var persistedData = JSON.stringify(products);
     localStorage.busMallClicks = persistedData;
   }
@@ -133,8 +134,32 @@ var chartConfig = {
       backgroundColor: 'rgba(255, 159, 64, 0.2)',
       borderColor: 'rgba(255, 159, 64, 1)',
       borderWidth: 3
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Products Chosen',
+      fontSize: 20
     },
-    {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+};
+
+var percentages = document.getElementById('percents');
+var ctx = percentages.getContext('2d');
+
+var percentConfig = {
+  type: 'bar',
+  data: {
+    labels: labelsList,
+    datasets: [{
       label: 'Percent Chosen of Times Shown',
       data: percents,
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -143,6 +168,11 @@ var chartConfig = {
     }]
   },
   options: {
+    title: {
+      display: true,
+      text: 'Percent Chosen',
+      fontSize: 20
+    },
     scales: {
       yAxes: [{
         ticks: {

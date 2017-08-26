@@ -1,14 +1,31 @@
 *{
   box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
 }
 .clearfix {
   clear: both;
 }
+body {
+  margin: 0;
+  background-color: #B2DFDB;
+}
+.top-banner {
+  background-color: #00897b;
+  padding: 40px 20px;
+  border-bottom-style: double;
+  border-bottom-color: #004D40;
+  margin-bottom: 50px;
+}
 h1 {
+  font-size: 42px;
   text-align: center;
+  margin: 0;
+  padding-bottom: 20px;
 }
 .instructions {
   margin: 0 20px;
+  font-size: 20px;
+  font-weight: 300;
 }
 div {
   float: left;
