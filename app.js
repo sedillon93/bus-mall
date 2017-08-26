@@ -77,7 +77,6 @@ function clearUsed(){
   }
 }
 
-
 for (var i = 0; i < products.length; i++){
   labelsList.push(products[i].id);
 }
@@ -106,13 +105,8 @@ function countClick(event){
     var prodImages = document.getElementsByClassName('product');
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
-
-      // if (products[i].shown > 0){
-      //   labelsList.push(products[i].id);
-      //   dataList.push(products[i].clicks);
-      // }
     }
-    
+
     for (var i = 0; i < products.length; i++) {
 
       dataList.push(products[i].clicks);
