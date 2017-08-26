@@ -6,6 +6,8 @@ var percents = [];
 var totalClicks = 0;
 var maxClicks = 25;
 var sumTotalArray = [];
+var usedProd = [];
+var numbers = [];
 var products = [];
 
 function Product(name, id, path) {
@@ -18,11 +20,8 @@ function Product(name, id, path) {
 
 var body = document.getElementsByTagName('body')[0];
 
-var usedProd = [];
-var numbers = [];
-
-if(localStorage.getItem('busMallClicks')) {
-  products = JSON.parse(localStorage.getItem('busMallClicks'));
+if(localStorage.busMallClicks) {
+  products = JSON.parse(localStorage.busMallClicks);
 }
 else {
   var bag = new Product('Bag', 'bag', 'img/bag.jpg');
