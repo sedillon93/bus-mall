@@ -53,7 +53,6 @@ function generateDisplay(){
 
   for (var i = 0; i < 3; i++){
     var num = Math.floor(Math.random() * products.length);
-    console.log(num);
 
     while ((numbers.includes(num)) || (usedProd.includes(num))){
       num = Math.floor(Math.random() * products.length);
