@@ -9,6 +9,7 @@ var sumTotalArray = [];
 var usedProd = [];
 var numbers = [];
 var products = [];
+console.log('this is a test');
 
 function Product(name, id, path) {
   this.name = name;
@@ -111,6 +112,7 @@ function countClick(event){
     for (var i = 0; i < products.length; i++) {
       dataList.push(products[i].clicks);
     }
+
     generateGraphData();
     var barChart = new Chart(context, chartConfig);
     var barChart = new Chart(ctx, percentConfig);
