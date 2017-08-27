@@ -112,8 +112,10 @@ function countClick(event){
     }
     generateGraphData();
     var barChart = new Chart(context, chartConfig);
+    var persistedData = JSON.stringify(productArray);
+    localStorage.busMallClicks = persistedData;
     // var barChart = new Chart(ctx, percentConfig);
-    localStorage.setItem('busMallClicks', JSON.stringify(products));
+    // localStorage.setItem('busMallClicks', JSON.stringify(products));
   }
 };
 
