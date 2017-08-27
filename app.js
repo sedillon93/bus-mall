@@ -84,10 +84,6 @@ function clearUsed(){
   }
 }
 
-for (var i = 0; i < products.length; i++){
-  labelsList.push(products[i].id);
-}
-
 function generateGraphData() {
   for (var i = 0; i < products.length; i++){
     var percent = (products[i].clicks / products[i].shown) * 100;
@@ -162,7 +158,7 @@ var chartConfig = {
 
 var percentages = document.getElementById('percents');
 var ctx = percentages.getContext('2d');
-
+console.log(labelsList);
 var percentConfig = {
   type: 'bar',
   data: {
