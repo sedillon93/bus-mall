@@ -6,6 +6,8 @@ var percents = [];
 var totalClicks = 0;
 var maxClicks = 25;
 var sumTotalArray = [];
+var usedProd = [];
+var numbers = [];
 var products = [];
 
 function Product(name, id, path) {
@@ -16,30 +18,35 @@ function Product(name, id, path) {
   this.shown = 0;
 }
 
-var bag = new Product('Bag', 'bag', 'img/bag.jpg');
-var banana = new Product('Banana Slicer', 'banana', 'img/banana.jpg');
-var bathroom = new Product('Bathroom appliance','bathroom', 'img/bathroom.jpg');
-var boots = new Product('Boots','boots', 'img/boots.jpg');
-var breakfast = new Product('All-in-1 Breakfast','breakfast', 'img/breakfast.jpg');
-var bubblegum = new Product('Meatball bubblegum', 'bubblegum', 'img/bubblegum.jpg');
-var chair = new Product('Red chair', 'chair', 'img/chair.jpg');
-var cthulhu = new Product('Cthulhu', 'cthulhu', 'img/cthulhu.jpg');
-var dogDuck = new Product('Dog duckbill', 'dogDuck', 'img/dogDuck.jpg');
-var dragon = new Product('Dragon meat', 'dragon', 'img/dragon.jpg');
-var pen = new Product('Utensil pen caps', 'pen', 'img/pen.jpg');
-var petSweep = new Product('Pet sweeper shoes','petSweep', 'img/petSweep.jpg');
-var scissors = new Product('Pizza scissors','scissors', 'img/scissors.jpg');
-var shark = new Product('Shark sleeping bag', 'shark', 'img/shark.jpg');
-var sweep = new Product('Baby sweeper pajamas', 'sweep', 'img/sweep.png');
-var tauntaun = new Product('Tauntaun sleeping bag', 'tauntaun', 'img/tauntaun.jpg');
-var unicorn = new Product('Unicorn meat', 'unicorn', 'img/unicorn.jpg');
-var usb = new Product('Octopus usb drive', 'usb', 'img/usb.gif');
-var waterCan = new Product('Artistic watering can', 'waterCan', 'img/watercan.jpg');
-var wineGlass = new Product('Wine glass', 'wineGlass', 'img/wineGlass.jpg');
+//if there is already something in localStorage, that array is the new products arrays
+if (localStorage.busMallClicks){
+  products = JSON.parse(localStorage.busMallClicks)
+}
+//if not, then make all these products and put them in the products array
+else {
+  var bag = new Product('Bag', 'bag', 'img/bag.jpg');
+  var banana = new Product('Banana Slicer', 'banana', 'img/banana.jpg');
+  var bathroom = new Product('Bathroom appliance','bathroom', 'img/bathroom.jpg');
+  var boots = new Product('Boots','boots', 'img/boots.jpg');
+  var breakfast = new Product('All-in-1 Breakfast','breakfast', 'img/breakfast.jpg');
+  var bubblegum = new Product('Meatball bubblegum', 'bubblegum', 'img/bubblegum.jpg');
+  var chair = new Product('Red chair', 'chair', 'img/chair.jpg');
+  var cthulhu = new Product('Cthulhu', 'cthulhu', 'img/cthulhu.jpg');
+  var dogDuck = new Product('Dog duckbill', 'dogDuck', 'img/dogDuck.jpg');
+  var dragon = new Product('Dragon meat', 'dragon', 'img/dragon.jpg');
+  var pen = new Product('Utensil pen caps', 'pen', 'img/pen.jpg');
+  var petSweep = new Product('Pet sweeper shoes','petSweep', 'img/petSweep.jpg');
+  var scissors = new Product('Pizza scissors','scissors', 'img/scissors.jpg');
+  var shark = new Product('Shark sleeping bag', 'shark', 'img/shark.jpg');
+  var sweep = new Product('Baby sweeper pajamas', 'sweep', 'img/sweep.png');
+  var tauntaun = new Product('Tauntaun sleeping bag', 'tauntaun', 'img/tauntaun.jpg');
+  var unicorn = new Product('Unicorn meat', 'unicorn', 'img/unicorn.jpg');
+  var usb = new Product('Octopus usb drive', 'usb', 'img/usb.gif');
+  var waterCan = new Product('Artistic watering can', 'waterCan', 'img/watercan.jpg');
+  var wineGlass = new Product('Wine glass', 'wineGlass', 'img/wineGlass.jpg');
 
-var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-
-var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+  var products = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+}
 
 var body = document.getElementsByTagName('body')[0];
 
@@ -48,6 +55,7 @@ var possibleProd = [];
 var numbers = [];
 
 function generateDisplay(){
+
   for (var i = 0; i < 3; i++){
     var num = Math.floor(Math.random() * products.length);
 
@@ -68,15 +76,12 @@ function generateDisplay(){
     prodImage.addEventListener('click', countClick);
   }
 }
+generateDisplay();
 
 function clearUsed(){
   for (var i = 0; i < 3; i++){
     usedProd.shift();
   }
-}
-
-for (var i = 0; i < products.length; i++){
-  labelsList.push(products[i].id);
 }
 
 function generateGraphData() {
@@ -87,7 +92,6 @@ function generateGraphData() {
 }
 
 function countClick(event){
-
   var target = event.target.id;
   for (var i = 0; i < products.length; i++){
     if (products[i].id === target){
@@ -104,9 +108,7 @@ function countClick(event){
     for (var i = 0; i < prodImages.length; i++){
       prodImages[i].removeEventListener('click', countClick);
     }
-
     for (var i = 0; i < products.length; i++) {
-
       dataList.push(products[i].clicks);
     }
     generateGraphData();
@@ -114,13 +116,15 @@ function countClick(event){
     var barChart = new Chart(ctx, percentConfig);
     var persistedData = JSON.stringify(products);
     localStorage.busMallClicks = persistedData;
+    // var barChart = new Chart(ctx, percentConfig);
+    // localStorage.setItem('busMallClicks', JSON.stringify(products));
   }
 };
 
 for (var i = 0; i < products.length; i++) {
   labelsList.push(products[i].id);
 }
-generateDisplay();
+
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
@@ -154,7 +158,7 @@ var chartConfig = {
 
 var percentages = document.getElementById('percents');
 var ctx = percentages.getContext('2d');
-
+console.log(labelsList);
 var percentConfig = {
   type: 'bar',
   data: {
@@ -170,6 +174,7 @@ var percentConfig = {
   options: {
     title: {
       display: true,
+      text: 'Products Chosen',
       text: 'Percent Chosen',
       fontSize: 20
     },
@@ -182,3 +187,34 @@ var percentConfig = {
     }
   }
 };
+
+// var percentages = document.getElementById('percents');
+// var ctx = percentages.getContext('2d');
+//
+// var percentConfig = {
+//   type: 'bar',
+//   data: {
+//     labels: labelsList,
+//     datasets: [{
+//       label: 'Percent Chosen of Times Shown',
+//       data: percents,
+//       backgroundColor: 'rgba(54, 162, 235, 0.2)',
+//       borderColor: 'rgba(54, 162, 235, 1)',
+//       borderWidth: 3
+//     }]
+//   },
+//   options: {
+//     title: {
+//       display: true,
+//       text: 'Percent Chosen',
+//       fontSize: 20
+//     },
+//     scales: {
+//       yAxes: [{
+//         ticks: {
+//           beginAtZero:true
+//         }
+//       }]
+//     }
+//   }
+// };
