@@ -138,8 +138,6 @@ var chartConfig = {
       backgroundColor: 'rgba(255, 159, 64, 0.2)',
       borderColor: 'rgba(255, 159, 64, 1)',
       borderWidth: 3
-<<<<<<< HEAD
-=======
     }]
   },
   options: {
@@ -171,17 +169,13 @@ var percentConfig = {
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
       borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 3
->>>>>>> master
     }]
   },
   options: {
     title: {
       display: true,
-<<<<<<< HEAD
       text: 'Products Chosen',
-=======
       text: 'Percent Chosen',
->>>>>>> master
       fontSize: 20
     },
     scales: {
